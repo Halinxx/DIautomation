@@ -15,6 +15,12 @@ export async function goToTab(tab: string, url: string, dropdown?: string) {
     await clickElement(tab);
     await verifyUrl(url);
 }
+export async function goToNewTab(tab: string, url: string) {
+    await clickElement(tab);
+    // We need to switch to news tab before reading url
+    await browser.switchWindow(url);
+    await verifyUrl(url);
+}
 
 export async function getElement(selector: string) {
     const el = await browser.$(selector);
