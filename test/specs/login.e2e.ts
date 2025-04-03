@@ -1,5 +1,5 @@
-import { expect, browser } from "@wdio/globals";
-import { clickElement, verifyUrl, addValue, getElement } from "../elements";
+import { expect } from "@wdio/globals";
+import { clickElement, verifyUrl, addValue, getElement, goToNewTab } from "../elements";
 
 // LOGIN PAGE ELEMENTS
 const LOGIN_LINK = '[class*="is--login"]';
@@ -18,10 +18,7 @@ const FORGOTTEN_PASS_URL = 'app.di.no/auth/static/password/reset';
 describe("Login", () => {
   it("should show error when login and password are incorrect", async () => {
 
-    await clickElement(LOGIN_LINK);
-    // We need to switch to login tab before reading url
-    await browser.switchWindow(LOGIN_URL);
-    await verifyUrl(LOGIN_URL);
+    await goToNewTab(LOGIN_LINK, LOGIN_URL)
 
     await addValue(USERNAME_INPUT, process.env.USERNAME);
     await addValue(PASSWORD_INPUT, process.env.PASSWORD);
@@ -34,10 +31,7 @@ describe("Login", () => {
   });
   it("should open forgotten password page and go back", async () => {
 
-    await clickElement(LOGIN_LINK);
-    // We need to switch to login tab before reading url
-    await browser.switchWindow(LOGIN_URL);
-    await verifyUrl(LOGIN_URL);
+    await goToNewTab(LOGIN_LINK, LOGIN_URL)
 
     await clickElement(FORGOTTEN_PASS_LINK);
     await verifyUrl(FORGOTTEN_PASS_URL);
