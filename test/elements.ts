@@ -3,7 +3,7 @@ export async function openUrl(path: string) {
 }
 
 export async function clickElement(element: string) {
-    const el = await $(element)
+    const el = await browser.$(element)
     await browser.waitUntil(() => el.isClickable())
     await el.click()
     // using pause to make sure it has enough time to load
@@ -12,4 +12,19 @@ export async function clickElement(element: string) {
 
 export async function verifyUrl(url: string) {
     expect(await browser.getUrl()).toContain(url)
+}
+
+export async function goToTab(tab: string, url: string, dropdown?: string) {
+    if(dropdown)
+    {
+        clickElement(dropdown)
+    }
+    await clickElement(tab)
+    await verifyUrl(url)
+}
+
+export async function getElement(selector: string) {
+    const el = await browser.$(selector)
+    await browser.waitUntil(() => el.isDisplayed())
+    return el;
 }
