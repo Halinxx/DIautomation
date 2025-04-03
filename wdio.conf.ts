@@ -45,7 +45,7 @@ export const config: WebdriverIO.Config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -73,7 +73,7 @@ export const config: WebdriverIO.Config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'warn',
     //
     // Set specific log levels per logger
     // loggers:
@@ -216,7 +216,8 @@ export const config: WebdriverIO.Config = {
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
     beforeTest: function (test, context) {
-        browser.maximizeWindow()
+        browser.maximizeWindow();
+        browser.url(process.env.baseUrl);
     },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling

@@ -1,36 +1,29 @@
-export async function openUrl(path: string) {
-    await browser.url(`'www.di.no/${path}'`)
-}
-
-export async function clickElement(element: string) {
-    const el = await browser.$(element)
-    await browser.waitUntil(() => el.isClickable())
-    await el.click()
+export async function clickElement(selector: string) {
+    const el = await browser.$(selector);
+    await browser.waitUntil(() => el.isClickable());
+    await el.click();
     // using pause to make sure it has enough time to load
-    await browser.pause(1000)
+    await browser.pause(1000);
 }
 
 export async function verifyUrl(url: string) {
-    expect(await browser.getUrl()).toContain(url)
+    expect(await browser.getUrl()).toContain(url);
 }
 
 export async function goToTab(tab: string, url: string, dropdown?: string) {
-    if(dropdown)
-    {
-        clickElement(dropdown)
-    }
-    await clickElement(tab)
-    await verifyUrl(url)
+    if (dropdown) clickElement(dropdown);
+    await clickElement(tab);
+    await verifyUrl(url);
 }
 
 export async function getElement(selector: string) {
-    const el = await browser.$(selector)
-    await browser.waitUntil(() => el.isDisplayed())
+    const el = await browser.$(selector);
+    await browser.waitUntil(() => el.isDisplayed());
     return el;
 }
 
 export async function addValue(input: string, text: string) {
     await clickElement(input);
-            const usernameInput = await getElement(input);
-            usernameInput.addValue(text);
+    const usernameInput = await getElement(input);
+    await usernameInput.addValue(text);
 }
