@@ -1,5 +1,5 @@
 import { browser } from "@wdio/globals";
-import { clickElement, verifyUrl, goToTab, goToNewTab } from "../elements";
+import { goToTab, goToNewTab } from "../elements";
 
 // HOME PAGE ELEMENTS
 const HOME_PAGE_LINK = '[href="/"]';

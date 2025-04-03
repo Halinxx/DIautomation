@@ -16,9 +16,10 @@ const FORGOTTEN_PASS_URL = 'app.di.no/auth/static/password/reset';
 
 
 describe("Login", () => {
+   beforeEach(async () => {
+      await goToNewTab(LOGIN_LINK, LOGIN_URL)
+    })
   it("should show error when login and password are incorrect", async () => {
-
-    await goToNewTab(LOGIN_LINK, LOGIN_URL)
 
     await addValue(USERNAME_INPUT, process.env.USERNAME);
     await addValue(PASSWORD_INPUT, process.env.PASSWORD);
@@ -29,9 +30,7 @@ describe("Login", () => {
     expect(loginErrorText).toBeDisplayed();
 
   });
-  it("should open forgotten password page and go back", async () => {
-
-    await goToNewTab(LOGIN_LINK, LOGIN_URL)
+  it("should open forgotten password page and cancel", async () => {
 
     await clickElement(FORGOTTEN_PASS_LINK);
     await verifyUrl(FORGOTTEN_PASS_URL);
