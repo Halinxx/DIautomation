@@ -28,3 +28,9 @@ export async function getElement(selector: string) {
     await browser.waitUntil(() => el.isDisplayed())
     return el;
 }
+
+export async function addValue(input: string, text: string) {
+    await clickElement(input);
+            const usernameInput = await getElement(input);
+            usernameInput.addValue(text);
+}

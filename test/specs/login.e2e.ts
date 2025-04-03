@@ -1,5 +1,5 @@
 import { expect, browser, $ } from '@wdio/globals'
-import { clickElement, verifyUrl, goToTab, getElement } from '../elements'
+import { clickElement, verifyUrl, goToTab, getElement, addValue } from '../elements'
 
 const LOGIN_LINK = '[class*="is--login"]'
 const USERNAME_INPUT = '[id="username"]'
@@ -20,7 +20,7 @@ const PASSWORD = "password1"
 
 
 
-describe('Home page', () => {
+describe('Login', () => {
     it('should show error when login and password are incorrect', async () => {
         await browser.url('www.di.no')
 
@@ -29,12 +29,9 @@ describe('Home page', () => {
         await browser.switchWindow(LOGIN_URL)
         await verifyUrl(LOGIN_URL)
 
-        await clickElement(USERNAME_INPUT);
-        const usernameInput = await getElement(USERNAME_INPUT);
-        usernameInput.addValue(USERNAME);
-        await clickElement(PASSWORD_INPUT);
-        const passwordInput = await getElement(PASSWORD_INPUT);
-        passwordInput.addValue(PASSWORD);
+        await addValue(USERNAME_INPUT, USERNAME)
+        await addValue(PASSWORD_INPUT, PASSWORD)
+
         await clickElement(LOGIN_BUTTON);
 
         expect($(LOGIN_ERROR_TEXT)).toBeDisplayed();
