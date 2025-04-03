@@ -1,18 +1,22 @@
 # DIautomation
+
+### Requirements
+* Node 18.0.0+ 
+
 To run tests you should follow:
 1. Clone repo
 2. Run `npm install`
 3. Create `.env` file in root folder and add
 
 
-        #.env file
+      #.env file
     	USERNAME=username1
-        PASSWORD=password
-        baseUrl=www.di.no
+      PASSWORD=password
+      baseUrl=www.di.no
 		
 4.Make sure you have at least one of the browsers listed in `wdio.conf.ts` and uncomment desired enviroments (safari and/or chrome recommended) 
 
-
+```
     capabilities: [
         {
             browserName: 'chrome'
@@ -27,6 +31,7 @@ To run tests you should follow:
         //     browserName: 'MicrosoftEdge'
         // }
         ],
+```
 5.Run` npx wdio run ./wdio.conf.js `
 
 6.Run `allure generate allure-results --clean  && allure open` to see results
